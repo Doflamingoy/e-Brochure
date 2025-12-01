@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Tour to Know</title>
+        <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .bg-circle {
+      position: absolute;
+      width: 120vmin;
+      height: 120vmin;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.08), transparent);
+      opacity: 0.8;
+    }
+
+    .bg-circle.small {
+      width: 30vmin;
+      height: 30vmin;
+      top: 12%;
+      left: 15%;
+      opacity: 0.35;
+    }
+
+    .bg-circle.small2 {
+      width: 22vmin;
+      height: 22vmin;
+      top: 28%;
+      right: 18%;
+      opacity: 0.28;
+    }
+
+    .page-modal {
+        width:100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+
+        &::before {
+        content: " ";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle at top left, #4b6b6f, #24363a);
+        }
+        
+
+        .bg-circle-members {
+            position: absolute;
+            width: 30vmin;
+            height: 30vmin;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+        }
+
+        .bg-circle-members:nth-child(1) {
+            top: 8px;
+            left: 8px;
+        }
+
+        .bg-circle-members:nth-child(2) {
+            top: 8px;
+            right: 8px;
+            background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9IssyUYUsy1ZbhzKq5DxfwZkqGhu34YMLLQ&s");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .bg-circle-members:nth-child(3) {
+            top: 50%;
+            transform: translateY(-50%);
+            left: 8px;
+        }
+        
+        .bg-circle-members:nth-child(4) {
+            top: 50%;
+            transform: translateY(-50%);
+            right: 8px;
+        }
+
+        .bg-circle-members:nth-child(5) {
+            bottom: 8px;
+            left: 8px;
+        }
+        
+        .bg-circle-members:nth-child(6) {
+            bottom: 8px;
+            right: 8px;
+        }
+        
+        .card {
+            position: relative;
+            z-index: 1;
+            width: 72vmin;
+            max-width: 640px;
+            aspect-ratio: 1 / 1;
+            border-radius: 50%;
+            background: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            box-shadow: 0 28px 60px rgba(0, 0, 0, 0.35);
+        }   
+
+        .title {
+            font-size: 72px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #305154;
+        }
+
+        .subtitle {
+            font-size: 32px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: #88979a;
+        }
+
+        .card {
+            cursor: pointer;
+        }
+    }
+
+    .page-modal.hidden {
+        display: none;
+    }
+
+    .button-container {
+        position: relative;
+        z-index: 2;
+        display: none;
+        gap: 24px;
+        align-items: center;
+    }
+
+    .button-container.visible {
+        display: flex;
+        flex-direction: row;
+        .text-introduction {
+            display: flex;
+            gap: 24px;
+            flex-direction: column;
+            h1 {
+                max-width: calc(100% - 40%);
+                span {
+                    color: #759286;
+                    }
+                }
+            }
+        }
+        .milestone-container {
+            display: flex;
+            padding: 16px;
+            flex-direction: row;
+            gap: 16px;
+
+        .milestone-wrapper {
+            display: flex;
+            padding: 16px;
+            flex-direction: column;
+            gap: 16px;
+            min-height: 300px;
+            justify-content: space-around;
+            
+                p,
+                h1 {
+                    color:  #ffffff;
+                }
+            
+        }
+    }
+
+        .milestone-wrapper:nth-child(1) {
+            background:  #24363a;
+        }
+
+        .milestone-wrapper:nth-child(2) {
+            background: #759286;
+
+        }
+
+        .milestone-wrapper:nth-child(3) {
+            background: #a7c9bb;
+        }
+
+    .nav-button {
+        padding: 16px 48px;
+        font-size: 20px;
+        font-weight: 600;
+        color: #24363a;
+        background: #FFF;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+        text-decoration: none;
+        display: inline-block;
+        text-align: center;
+    }
+
+    .nav-button:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+    }
+
+    .nav-button:active {
+        transform: translateY(-2px);
+    }
+
+    @media (max-width: 600px) {
+      .card {
+        width: 78vmin;
+      }
+      .title {
+        font-size: 1.8rem;
+      }
+      .subtitle {
+        font-size: 0.75rem;
+      }
+    }
+  </style>
+    </head>
+    <body>
+        <div class = "page-modal">
+
+        <!-- subtle background circles -->
+        <div class="bg-circle-members"></div>
+        <div class="bg-circle-members"></div>
+        <div class="bg-circle-members"></div>
+        <div class="bg-circle-members"></div>
+        <div class="bg-circle-members"></div>
+        <div class="bg-circle-members"></div>
+
+        <!-- main white circle -->
+        <div class="card" id="mainCard">
+            <div class="title">Project Presentation</div>
+            <div class="subtitle">Tour to know</div>
+        </div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="button-container" id="buttonContainer">
+            <div class = "text-introduction">
+                <h1>Some intro text to make <span>things entertaining </span></h1>
+                <p> I love you hehehehe</p>
+                <p> more text here chu chu</p>
+            </div>
+            <div class = "milestone-container">
+                <div class = "milestone-wrapper">
+                    <h1>Milestone 1</h1>
+                    <p> Definition or something about milestone 1</p>
+
+                    <a href="milestone-1.html" class="nav-button">See More</a>
+                </div>
+                <div class = "milestone-wrapper">
+                    <h1> Milestone 2</h1>
+                    <p> Definition or something about milestone 2</p>
+
+                    <a href="milestone-2.html" class="nav-button">See More</a>
+                </div>
+                <div class = "milestone-wrapper">
+                    <h1> Milestone 3</h1>
+                    <p> Definition or something about milestone 3</p>
+
+                    <a href="milestone-3.html" class="nav-button">See More</a>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            const mainCard = document.getElementById('mainCard');
+            const pageModal = document.querySelector('.page-modal');
+            const buttonContainer = document.getElementById('buttonContainer');
+
+            mainCard.addEventListener('click', function() {
+                pageModal.classList.add('hidden');
+                buttonContainer.classList.add('visible');
+            });
+        </script>
+    </body>
+</html>
