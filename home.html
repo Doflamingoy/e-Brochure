@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Tour to Know</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        height: 100vh;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      .button-container {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        gap: 24px;
+        align-items: center;
+        .text-introduction {
+          display: flex;
+          gap: 24px;
+          flex-direction: column;
+          h1 {
+            max-width: calc(100% - 40%);
+            span {
+              color: #759286;
+            }
+          }
+        }
+      }
+      .milestone-container {
+        display: flex;
+        padding: 16px;
+        flex-direction: row;
+        gap: 16px;
+
+        .milestone-wrapper {
+          display: flex;
+          padding: 16px;
+          flex-direction: column;
+          gap: 16px;
+          min-height: 300px;
+          justify-content: space-around;
+
+          p,
+          h1 {
+            color: #ffffff;
+          }
+        }
+      }
+
+      .milestone-wrapper:nth-child(1) {
+        background: #24363a;
+      }
+
+      .milestone-wrapper:nth-child(2) {
+        background: #759286;
+      }
+
+      .milestone-wrapper:nth-child(3) {
+        background: #a7c9bb;
+      }
+
+      .nav-button {
+        padding: 16px 48px;
+        font-size: 20px;
+        font-weight: 600;
+        color: #24363a;
+        background: #fff;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+        text-decoration: none;
+        display: inline-block;
+        text-align: center;
+      }
+
+      .nav-button:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+      }
+
+      .nav-button:active {
+        transform: translateY(-2px);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation Buttons -->
+    <div class="button-container" id="buttonContainer">
+      <div class="text-introduction">
+        <h1>Some intro text to make <span>things entertaining </span></h1>
+        <p>I love you hehehehe</p>
+        <p>more text here chu chu</p>
+      </div>
+      <div class="milestone-container">
+        <div class="milestone-wrapper">
+          <h1>Milestone 1</h1>
+          <p>Definition or something about milestone 1</p>
+
+          <a href="milestone-1.html" class="nav-button">See More</a>
+        </div>
+        <div class="milestone-wrapper">
+          <h1>Milestone 2</h1>
+          <p>Definition or something about milestone 2</p>
+
+          <a href="milestone-2.html" class="nav-button">See More</a>
+        </div>
+        <div class="milestone-wrapper">
+          <h1>Milestone 3</h1>
+          <p>Definition or something about milestone 3</p>
+
+          <a href="milestone-3.html" class="nav-button">See More</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
