@@ -1,0 +1,1692 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Milestone 1</title>
+    <style>
+      body {
+        height: 100vh;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+      }
+
+      .milestone-container {
+        padding: 32px;
+      }
+
+      .highlighted {
+        color: #345656;
+      }
+
+      .introduction-wrapper {
+        h1 {
+          margin: 0;
+          text-transform: uppercase;
+          color: #345656;
+        }
+
+        .introduction-card-wrapper {
+          display: flex;
+
+          .left-part,
+          .right-part {
+            width: 25%;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            .introduction-card {
+              display: flex;
+              align-items: center;
+              gap: 16px;
+              h1 {
+                color: #345656;
+              }
+              p {
+                font-weight: 500;
+              }
+            }
+          }
+          .mid-part {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            font-size: 16px;
+            font-weight: 600;
+            color: white;
+            justify-content: space-around;
+            align-items: center;
+
+            input[type="radio"] {
+              display: none;
+            }
+
+            @keyframes radio-translate {
+              0% {
+                transform: translateX(0);
+              }
+
+              50% {
+                transform: translateY(-10px);
+              }
+
+              100% {
+                transform: translateX(0);
+              }
+            }
+
+            input[type="radio"]:checked + label:before {
+              background-color: #759286;
+              top: 0;
+            }
+
+            input[type="radio"]:checked + label {
+              background: #759286;
+              color: #000;
+              border-color: rgb(129, 235, 129);
+              animation: radio-translate 0.5s ease-in-out;
+            }
+
+            label {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              padding: 10px;
+              border: 1px solid #ccc;
+              border-radius: 5px;
+              margin-right: 12px;
+              cursor: pointer;
+              position: relative;
+              transition: all 0.3s ease-in-out;
+              background: #24363a;
+              height: fit-content;
+              width: 220px;
+
+              &::before {
+                content: "";
+                display: block;
+                position: absolute;
+                top: 50%;
+                left: 0;
+                transform: translate(-50%, -50%);
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background-color: #fff;
+                border: 2px solid #ccc;
+                transition: all 0.3s ease-in-out;
+              }
+            }
+          }
+        }
+      }
+
+      .respondents-wrapper {
+        .Respondents-text {
+          > h1 {
+            text-transform: uppercase;
+            color: #345656;
+          }
+          > p {
+            text-transform: uppercase;
+            color: #345656;
+          }
+          .highlighted {
+            font-weight: 500;
+          }
+          .percentage {
+            display: inline-block;
+            transform: rotate(270deg);
+          }
+
+          .respondents-map {
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            .map-wrapper {
+              position: relative;
+              h1 {
+                position: absolute;
+                font-size: 212px;
+                z-index: -1;
+                top: -76px;
+                left: 50%;
+                transform: translateX(-50%);
+                opacity: 0.1;
+                span {
+                  font-size: 69px;
+                  text-transform: uppercase;
+                  position: absolute;
+                  bottom: -36px;
+                  left: 12px;
+                }
+              }
+              .map-pin-wrapper {
+                position: absolute;
+                bottom: 166px;
+                left: 122px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                .map-pin-container {
+                  position: relative;
+
+                  p {
+                    display: none;
+                    position: absolute;
+                    text-wrap: nowrap;
+                    transform: translateX(-50%);
+                    left: 50%;
+                    top: -48px;
+                    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+                    padding: 4px;
+                    background: #fff;
+                    font-weight: 600;
+                    border-radius: 8px;
+                  }
+
+                  img {
+                    height: 30px;
+                    width: 30px;
+                    transition: all 0.4s;
+                  }
+
+                  img:hover {
+                    transform: scale(1.1);
+                  }
+                }
+              }
+            }
+
+            .map-wrapper.cainta {
+              .map-pin-wrapper {
+                bottom: 50%;
+                transform: translateY(-50%);
+              }
+            }
+          }
+        }
+      }
+
+      .respondents-map .map-wrapper .map-pin-container img:hover + p {
+        display: block !important;
+      }
+
+      .pie-chart-container {
+        > h1 {
+          text-transform: uppercase;
+        }
+        .accessibility,
+        .diversity,
+        .inclusivity {
+          padding: 32px;
+          display: flex;
+          justify-content: space-around;
+          .pie-chart-wrapper {
+            max-width: 255px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            h1 {
+              font-size: 16px;
+            }
+            p {
+              margin-top: -24px;
+              font-size: 12px;
+            }
+            .pie-chart {
+              width: 200px;
+              height: 200px;
+              border-radius: 50%;
+              position: relative;
+              transition: all 0.3s ease;
+
+              p {
+                position: absolute;
+                font-size: 16px;
+                display: none;
+
+                span {
+                  font-weight: 500;
+                  padding-right: 4px;
+                }
+              }
+            }
+          }
+          .pie-chart:hover {
+            p {
+              display: block;
+            }
+          }
+
+          .pie-chart::before {
+            content: "";
+            background-image: url(graph-circle.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            display: block;
+            width: calc(100% + 180px);
+            height: calc(100% + 180px);
+            top: -39px;
+            left: -98px;
+            position: absolute;
+          }
+        }
+        .accessibility {
+          .pie-chart-wrapper:nth-child(1) {
+            .pie-chart {
+              background: conic-gradient(
+                #ff9900 0% 35%,
+                /* 35% slice in green */ #109618 35% 48%,
+                /* 25% slice in blue */ #990099 48% 51%,
+                /* 25% slice in yellow */ #3366cc 51% 65%,
+                /* 15% slice in red */ #dc3912 65% 100% /* 15% slice in red */
+              );
+
+              p:nth-child(1) {
+                bottom: -8px;
+                left: -96px;
+                color: #3366cc;
+              }
+
+              p:nth-child(2) {
+                left: -65px;
+                color: #dc3912;
+              }
+
+              p:nth-child(3) {
+                right: -65px;
+                color: #ff9900;
+              }
+
+              p:nth-child(4) {
+                right: -65px;
+                bottom: -8px;
+                color: #109618;
+              }
+
+              p:nth-child(5) {
+                left: 50%;
+                transform: translate(-50%);
+                bottom: -40px;
+                text-wrap: nowrap;
+                color: #990099;
+              }
+            }
+          }
+
+          .pie-chart-wrapper:nth-child(2) {
+            .pie-chart {
+              background: conic-gradient(
+                #dc3912 0% 69%,
+                /* 35% slice in green */ #ff9900 69% 86%,
+                /* 25% slice in blue */ #3366cc 86% 100%
+                  /* 25% slice in yellow */
+              );
+
+              p:nth-child(1) {
+                left: -65px;
+                color: #3366cc;
+                top: -40px;
+              }
+
+              p:nth-child(2) {
+                bottom: -40px;
+                left: 50%;
+                text-wrap: nowrap;
+                transform: translate(-50%);
+                color: #dc3912;
+              }
+
+              p:nth-child(3) {
+                left: -96px;
+                bottom: 50%;
+                transform: translateY(-50%);
+                color: #ff9900;
+              }
+            }
+          }
+          .pie-chart-wrapper:nth-child(3) {
+            .pie-chart {
+              background: conic-gradient(
+                #ff9900 0% 22%,
+                #109618 22% 29%,
+                #990099 29% 32%,
+                #3366cc 32% 45%,
+                #dc3912 45% 100%
+              );
+
+              p:nth-child(1) {
+                right: -106px;
+                color: #3366cc;
+                bottom: -8px;
+              }
+
+              p:nth-child(2) {
+                bottom: 32px;
+                left: -80px;
+                color: #dc3912;
+              }
+
+              p:nth-child(3) {
+                right: -48px;
+                top: -16px;
+                color: #ff9900;
+              }
+              p:nth-child(4) {
+                right: -96px;
+                bottom: 30%;
+                transform: translateY(-30%);
+                color: #109618;
+              }
+              p:nth-child(5) {
+                right: -96px;
+                bottom: 8%;
+                transform: translateY(-8%);
+                color: #990099;
+              }
+            }
+          }
+          .pie-chart-wrapper:nth-child(4) {
+            .pie-chart {
+              background: conic-gradient(
+                #ff9900 0% 17%,
+                #990099 17% 18%,
+                #3366cc 18% 35%,
+                #dc3912 35% 100%
+              );
+
+              p:nth-child(1) {
+                bottom: 42px;
+                right: -96px;
+                color: #3366cc;
+              }
+
+              p:nth-child(2) {
+                bottom: 16px;
+                left: -72px;
+                color: #dc3912;
+              }
+
+              p:nth-child(3) {
+                top: -32px;
+                right: -16px;
+                color: #ff9900;
+              }
+
+              p:nth-child(4) {
+                top: 8px;
+                right: -80px;
+                color: #990099;
+              }
+            }
+          }
+          .pie-chart-wrapper:nth-child(5) {
+            .pie-chart {
+              background: conic-gradient(
+                #ff9900 0% 15%,
+                #3366cc 15% 37%,
+                #dc3912 37% 100%
+              );
+
+              p:nth-child(1) {
+                right: -96px;
+                color: #3366cc;
+                bottom: 48px;
+              }
+
+              p:nth-child(2) {
+                bottom: 16px;
+                left: -72px;
+                color: #dc3912;
+              }
+
+              p:nth-child(3) {
+                top: -32px;
+                right: -16px;
+                color: #ff9900;
+              }
+            }
+          }
+        }
+        .diversity {
+          .pie-chart-wrapper:nth-child(1) {
+            .pie-chart {
+              background: conic-gradient(
+                #990099 0% 10%,
+                /* 35% slice in green */ #3366cc 10% 18%,
+                /* 25% slice in blue */ #dc3912 18% 24%,
+                /* 25% slice in yellow */ #ff9900 24% 66%,
+                /* 15% slice in red */ #109618 66% 100% /* 15% slice in red */
+              );
+
+              p:nth-child(1) {
+                top: -8px;
+                right: 0;
+                color: #990099;
+              }
+
+              p:nth-child(2) {
+                left: -65px;
+                top: 40px;
+                color: #109618;
+              }
+
+              p:nth-child(3) {
+                color: #ff9900;
+                bottom: -40px;
+                right: 50%;
+                transform: translateX(50%);
+              }
+
+              p:nth-child(4) {
+                right: -96px;
+                bottom: 50%;
+                color: #dc3912;
+              }
+
+              p:nth-child(5) {
+                right: -112px;
+                top: 24px;
+                text-wrap: nowrap;
+                color: #3366cc;
+              }
+            }
+          }
+
+          .pie-chart-wrapper:nth-child(2) {
+            .pie-chart {
+              background: conic-gradient(
+                #990099 0% 7%,
+                #3366cc 7% 11%,
+                #dc3912 11% 12%,
+                #ff9900 12% 43%,
+                #109618 43% 100%
+              );
+
+              p:nth-child(1) {
+                left: 50%;
+                transform: translate(-50%);
+                text-wrap: nowrap;
+                color: #990099;
+                top: -0;
+              }
+
+              p:nth-child(2) {
+                bottom: -16px;
+                left: -40px;
+                color: #109618;
+              }
+
+              p:nth-child(3) {
+                bottom: -16px;
+                right: -64px;
+                transform: translateY(-50%);
+                color: #ff9900;
+              }
+
+              p:nth-child(4) {
+                right: -64px;
+                top: 40px;
+                color: #dc3912;
+              }
+
+              p:nth-child(5) {
+                right: -112px;
+                top: 18px;
+                color: #3366cc;
+              }
+            }
+          }
+          .pie-chart-wrapper:nth-child(3) {
+            .pie-chart {
+              background: conic-gradient(
+                #990099 0% 22%,
+                #3366cc 22% 26%,
+                #dc3912 26% 27%,
+                #ff9900 27% 44%,
+                #109618 44% 100%
+              );
+
+              p:nth-child(1) {
+                right: -106px;
+                color: #990099;
+                top: 16px;
+              }
+
+              p:nth-child(2) {
+                bottom: 32px;
+                left: -80px;
+                color: #109618;
+              }
+
+              p:nth-child(3) {
+                right: -48px;
+                bottom: -16px;
+                color: #ff9900;
+              }
+              p:nth-child(4) {
+                right: -96px;
+                bottom: 30%;
+                transform: translateY(-30%);
+                color: #dc3912;
+              }
+              p:nth-child(5) {
+                right: -96px;
+                bottom: 35%;
+                transform: translateY(-35%);
+                color: #3366cc;
+              }
+            }
+          }
+          .pie-chart-wrapper:nth-child(4) {
+            .pie-chart {
+              background: conic-gradient(
+                #990099 0% 5%,
+                #3366cc 5% 10%,
+                #dc3912 10% 17%,
+                #ff9900 17% 53%,
+                #109618 53% 100%
+              );
+
+              p:nth-child(1) {
+                top: 0;
+                right: 50%;
+                transform: translateX(50%);
+                color: #990099;
+                text-wrap: nowrap;
+              }
+
+              p:nth-child(2) {
+                bottom: 16px;
+                left: -72px;
+                color: #109618;
+              }
+
+              p:nth-child(3) {
+                bottom: -24px;
+                right: -48px;
+                color: #ff9900;
+              }
+
+              p:nth-child(4) {
+                top: 42px;
+                right: -72px;
+                color: #dc3912;
+              }
+
+              p:nth-child(5) {
+                top: 16px;
+                right: -106px;
+                color: #3366cc;
+              }
+            }
+          }
+          .pie-chart-wrapper:nth-child(5) {
+            .pie-chart {
+              background: conic-gradient(
+                #990099 0% 10%,
+                #3366cc 10% 15%,
+                #dc3912 15% 17%,
+                #ff9900 13% 30%,
+                #109618 30% 100%
+              );
+
+              p:nth-child(1) {
+                right: -12px;
+                color: #990099;
+                top: 0;
+              }
+
+              p:nth-child(2) {
+                bottom: 16px;
+                left: -72px;
+                color: #109618;
+              }
+
+              p:nth-child(3) {
+                bottom: 50%;
+                right: -56px;
+                transform: translate(50%);
+                color: #ff9900;
+              }
+              p:nth-child(4) {
+                top: 48px;
+                right: -88px;
+                color: #dc3912;
+              }
+              p:nth-child(5) {
+                top: 24px;
+                right: -124px;
+                color: #3366cc;
+              }
+            }
+          }
+        }
+        .inclusivity {
+          .pie-chart-wrapper:nth-child(1) {
+            .pie-chart {
+              background: conic-gradient(
+                #3366cc 0% 19%,
+                #dc3912 19% 71%,
+                #ff9900 71% 97%,
+                #109618 97% 99%,
+                #990099 99% 100%
+              );
+
+              p:nth-child(1) {
+                top: 4px;
+                right: -72px;
+                color: #3366cc;
+              }
+
+              p:nth-child(2) {
+                color: #dc3912;
+                bottom: -40px;
+                right: 50%;
+                transform: translateX(50%);
+              }
+
+              p:nth-child(3) {
+                color: #ff9900;
+                left: -65px;
+                top: 40px;
+              }
+
+              p:nth-child(4) {
+                left: 2px;
+                top: 4px;
+                color: #109618;
+              }
+
+              p:nth-child(5) {
+                top: -14px;
+                text-wrap: nowrap;
+                color: #990099;
+                right: 50%;
+                transform: translateX(50%);
+              }
+            }
+          }
+
+          .pie-chart-wrapper:nth-child(2) {
+            .pie-chart {
+              background: conic-gradient(
+                #3366cc 0% 19%,
+                #dc3912 19% 84%,
+                #ff9900 84% 97%,
+                #109618 97% 99%,
+                #990099 99% 100%
+              );
+
+              p:nth-child(1) {
+                right: -88px;
+                text-wrap: nowrap;
+                color: #3366cc;
+                top: 22px;
+              }
+
+              p:nth-child(2) {
+                bottom: -16px;
+                left: -40px;
+                color: #dc3912;
+              }
+
+              p:nth-child(3) {
+                top: 12px;
+                left: -32px;
+                color: #ff9900;
+              }
+
+              p:nth-child(4) {
+                top: -4px;
+                right: 70%;
+                transform: translate(30%);
+                color: #109618;
+              }
+
+              p:nth-child(5) {
+                right: 50%;
+                transform: translate(50%);
+                top: -22px;
+                color: #990099;
+                text-wrap: nowrap;
+              }
+            }
+          }
+          .pie-chart-wrapper:nth-child(3) {
+            .pie-chart {
+              background: conic-gradient(
+                #3366cc 0% 13%,
+                #dc3912 13% 79%,
+                #ff9900 79% 98%,
+                #109618 98% 99%,
+                #990099 99% 100%
+              );
+
+              p:nth-child(1) {
+                right: -80px;
+                color: #3366cc;
+                top: 16px;
+              }
+
+              p:nth-child(2) {
+                bottom: 32px;
+                left: -80px;
+                color: #dc3912;
+              }
+
+              p:nth-child(3) {
+                top: 12px;
+                left: -32px;
+                color: #ff9900;
+              }
+
+              p:nth-child(4) {
+                top: -4px;
+                right: 70%;
+                transform: translate(30%);
+                color: #109618;
+              }
+
+              p:nth-child(5) {
+                right: 50%;
+                transform: translate(50%);
+                top: -22px;
+                color: #990099;
+                text-wrap: nowrap;
+              }
+            }
+          }
+          .pie-chart-wrapper:nth-child(4) {
+            .pie-chart {
+              background: conic-gradient(
+                #3366cc 0% 20%,
+                #dc3912 20% 85%,
+                #ff9900 85% 100%
+              );
+
+              p:nth-child(1) {
+                right: -64px;
+                color: #3366cc;
+                top: 0;
+              }
+
+              p:nth-child(2) {
+                bottom: -16px;
+                left: -48px;
+                color: #dc3912;
+              }
+
+              p:nth-child(3) {
+                top: 0;
+                left: 0;
+                color: #ff9900;
+              }
+            }
+          }
+          .pie-chart-wrapper:nth-child(5) {
+            .pie-chart {
+              background: conic-gradient(
+                #3366cc 0% 21%,
+                #dc3912 21% 87%,
+                #ff9900 87% 100%
+              );
+
+              p:nth-child(1) {
+                right: -64px;
+                color: #3366cc;
+                top: 0;
+              }
+
+              p:nth-child(2) {
+                bottom: -16px;
+                left: -48px;
+                color: #dc3912;
+              }
+
+              p:nth-child(3) {
+                top: 0;
+                left: 0;
+                color: #ff9900;
+              }
+            }
+          }
+        }
+      }
+      .pie-chart:hover {
+        transform: rotate(5deg);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      }
+      .summary-container {
+        padding-bottom: 80px;
+        margin-bottom: 40px;
+        > h1 {
+          color: #345656;
+          text-transform: uppercase;
+        }
+
+        .summary-card-wrapper {
+          display: flex;
+          justify-content: space-around;
+
+          .summary-card {
+            width: 300px;
+            height: 360px;
+            background: rgb(103, 225, 255);
+            transition: all 0.4s;
+            border-radius: 10px;
+            font-size: 30px;
+            font-weight: 900;
+            .first-content {
+              height: 100%;
+              width: 100%;
+              transition: all 0.4s;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              opacity: 1;
+              border-radius: 15px;
+            }
+            .second-content {
+              height: 0%;
+              width: 100%;
+              opacity: 0;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border-radius: 15px;
+              transition: all 0.4s;
+              font-size: 0px;
+              transform: rotate(90deg) scale(-1);
+              ul {
+                padding: 0 32px;
+                li {
+                  padding: 6px 0;
+                }
+              }
+            }
+          }
+
+          .summary-card:nth-child(1) {
+            background: #24363a;
+            color: #fff;
+          }
+
+          .summary-card:nth-child(2) {
+            background: #759286;
+          }
+
+          .summary-card:nth-child(3) {
+            background: #a7c9bb;
+          }
+        }
+      }
+
+      .summary-container .summary-card-wrapper .summary-card:hover {
+        border-radius: 15px;
+        cursor: pointer;
+        transform: scale(1.1);
+        box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.4);
+      }
+
+      .summary-container
+        .summary-card-wrapper
+        .summary-card:hover
+        .first-content {
+        height: 0px;
+        opacity: 0;
+      }
+
+      .summary-container
+        .summary-card-wrapper
+        .summary-card:hover
+        .second-content {
+        opacity: 1;
+        height: 100%;
+        font-size: 12px;
+        transform: rotate(0deg);
+      }
+
+      .conclusion-overall {
+        display: flex;
+        gap: 16px;
+        .conclusion-wrapper,
+        .overall-wrapper {
+          display: flex;
+          justify-content: space-around;
+          flex-direction: column;
+          color: #fff;
+          > h1 {
+            color: #345656;
+            text-transform: uppercase;
+          }
+          .card {
+            padding: 16px;
+            background: #759286;
+            height: 280px;
+            .card-header {
+              display: flex;
+              align-items: center;
+              gap: 8px;
+              h1 {
+                text-transform: uppercase;
+              }
+              svg {
+                width: 40px;
+                height: 40px;
+              }
+            }
+          }
+        }
+      }
+
+      .next-page {
+        display: flex;
+        justify-content: space-between;
+        a {
+          text-decoration: none;
+        }
+        a:nth-child(1) {
+          .animated-button svg {
+            transform: rotate(180deg);
+          }
+
+          .animated-button .text {
+            transform: translateX(12px);
+          }
+
+          .animated-button:hover .text {
+            transform: translateX(-12px);
+          }
+
+          .animated-button .arr-2 {
+            left: 16px;
+            fill: #000;
+          }
+
+          .animated-button:hover .arr-2 {
+            left: -25%;
+          }
+
+          .animated-button:hover .arr-1 {
+            right: 16px;
+          }
+
+          .animated-button .arr-1 {
+            right: -25%;
+          }
+        }
+        .animated-button {
+          position: relative;
+          display: flex;
+          align-items: center;
+          gap: 4px;
+          padding: 16px 36px;
+          border: 4px solid;
+          border-color: transparent;
+          background: #759286;
+          font-size: 16px;
+          border-radius: 100px;
+          font-weight: 600;
+          color: #1f387e;
+          box-shadow: 0 0 0 2px #ffffff;
+          cursor: pointer;
+          overflow: hidden;
+          transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .animated-button svg {
+          position: absolute;
+          width: 24px;
+          fill: #fff;
+          z-index: 9;
+          transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .animated-button .arr-1 {
+          right: 16px;
+          fill: #000;
+        }
+
+        .animated-button .arr-2 {
+          left: -25%;
+        }
+
+        .animated-button .circle {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 20px;
+          height: 20px;
+          background: #24363a;
+          border-radius: 50%;
+          opacity: 0;
+          transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .animated-button .text {
+          position: relative;
+          z-index: 1;
+          transform: translateX(-12px);
+          transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+          color: #000;
+        }
+
+        .animated-button:hover {
+          box-shadow: 0 0 0 12px transparent;
+          color: #212121;
+          border-radius: 12px;
+          background: #24363a;
+        }
+
+        .animated-button:hover .arr-1 {
+          right: -25%;
+        }
+
+        .animated-button:hover .arr-2 {
+          left: 16px;
+        }
+
+        .animated-button:hover .text {
+          transform: translateX(12px);
+          color: #fff;
+        }
+
+        .animated-button:hover svg {
+          fill: #fff;
+        }
+
+        .animated-button:active {
+          scale: 0.95;
+        }
+
+        .animated-button:hover .circle {
+          width: 220px;
+          height: 220px;
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="milestone-wrapper">
+      <div class="milestone-container introduction-wrapper">
+        <h1>Introduction</h1>
+        <div class="introduction-card-wrapper">
+          <div class="left-part">
+            <div class="introduction-card">
+              <h1>01</h1>
+              <p>
+                EDI (Equity, Diversity, and Inclusion) has become a major focus
+                in higher education to ensure fair and meaningful learning for
+                all students
+              </p>
+            </div>
+            <div class="introduction-card">
+              <h1>02</h1>
+              <p>
+                In mathematics education, EDI is especially important because
+                the subject is seen as neutral, yet hidden barriers can still
+                exclude certain groups.
+              </p>
+            </div>
+            <div class="introduction-card">
+              <h1>03</h1>
+              <p>
+                The study investigates how EDI principles are applied, perceived
+                and experienced by mathematics majors across various
+                universities.
+              </p>
+            </div>
+            <div class="introduction-card">
+              <h1>04</h1>
+              <p>
+                Research shows that gender bias, lack of representation,
+                socio-cultural stereotypes by mathematics mahors across various
+                universities
+              </p>
+            </div>
+          </div>
+          <div class="mid-part">
+            <input
+              value="value-1"
+              name="value-radio"
+              id="value-1"
+              type="radio"
+            />
+            <label for="value-1">Accessibility</label>
+            <input
+              value="value-2"
+              name="value-radio"
+              id="value-2"
+              type="radio"
+            />
+            <label for="value-2">Diversity</label>
+            <input
+              value="value-3"
+              name="value-radio"
+              id="value-3"
+              type="radio"
+            />
+            <label for="value-3">Inclusivity</label>
+          </div>
+          <div class="right-part">
+            <div class="introduction-card">
+              <h1>05</h1>
+              <p>
+                These barriers negatively impact students' confidencem
+                engagement, and academic success.
+              </p>
+            </div>
+            <div class="introduction-card">
+              <h1>06</h1>
+              <p>
+                The study aims to evaluate how inclusive current mathematics
+                learning environments truly are.
+              </p>
+            </div>
+            <div class="introduction-card">
+              <h1>07</h1>
+              <p>
+                Findings will help identify improvements needed to increase
+                diversity and support in mathematics programs.
+              </p>
+            </div>
+            <div class="introduction-card">
+              <h1>08</h1>
+              <p>
+                Mathematics majors' experiences are crucial since they will
+                becomw future educators, researchers, and professionals shaping
+                the next generation of learners.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="milestone-container respondents-wrapper">
+        <div class="Respondents-text">
+          <h1>Respondents</h1>
+          <p class="highlighted">College Students from</p>
+          <div class="respondents-map">
+            <div class="map-wrapper">
+              <h1>
+                Isabela <br />
+                <span>Province</span>
+              </h1>
+              <div class="map-pin-wrapper">
+                <div class="map-pin-container">
+                  <img src="pin-isabela.svg" />
+                  <p>48% Isabela State University</p>
+                </div>
+              </div>
+              <img src="isabela.png" />
+            </div>
+            <div class="map-wrapper cainta">
+              <h1>
+                Cainta <br />
+                <span>Rizal</span>
+              </h1>
+              <div class="map-pin-wrapper">
+                <div class="map-pin-container">
+                  <img src="pin-cainta.svg" />
+                  <p>52% ICCT Colleges</p>
+                </div>
+              </div>
+              <img src="cainta.png" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="milestone-container pie-chart-container">
+        <h1>Survey questions and results</h1>
+        <h1>Topic A: <span class="highlighted">Accessibility</span></h1>
+        <div class="accessibility">
+          <div class="pie-chart-wrapper">
+            <div class="pie-chart">
+              <p><span>14%</span>Strongly Agree</p>
+              <p><span>38%</span>Agree</p>
+              <p><span>32%</span>Neutral</p>
+              <p><span>13%</span>Disagree</p>
+              <p><span>3%</span>Strongly Disagree</p>
+            </div>
+            <h1>
+              Our school has a mathematics laboratory that supports student
+              learning
+            </h1>
+            <p>100 responses</p>
+          </div>
+          <div class="pie-chart-wrapper">
+            <div class="pie-chart">
+              <p><span>14%</span>Strongly Agree</p>
+              <p><span>69%</span>Agree</p>
+              <p><span>17%</span> Neutral</p>
+            </div>
+            <h1>
+              The library and learning resource center provide adequate
+              mathematics reference (print or digital)
+            </h1>
+            <p>100 responses</p>
+          </div>
+
+          <div class="pie-chart-wrapper">
+            <div class="pie-chart">
+              <p><span>13%</span>Strongly Agree</p>
+              <p><span>55%</span>Agree</p>
+              <p><span>22%</span>Neutral</p>
+              <p><span>7%</span>Disagree</p>
+              <p>
+                <span>3%</span>Strongly <br />
+                Disagree
+              </p>
+            </div>
+            <h1>
+              In our school, I have access to materials that are needed for Math
+              topics. (scientific calculator, graphing papers)
+            </h1>
+            <p>100 responses</p>
+          </div>
+
+          <div class="pie-chart-wrapper">
+            <div class="pie-chart">
+              <p>
+                <span>17%</span>Strongly <br />
+                Agree
+              </p>
+              <p><span>65%</span>Agree</p>
+              <p><span>17%</span>Neutral</p>
+              <p>
+                <span>1%</span>Strongly <br />
+                Disagree
+              </p>
+            </div>
+            <h1>
+              The institution adapts teaching methods to accommodate students
+              with varying learning needs.
+            </h1>
+            <p>100 responses</p>
+          </div>
+
+          <div class="pie-chart-wrapper">
+            <div class="pie-chart">
+              <p>
+                <span>22%</span>Strongly <br />
+                Agree
+              </p>
+              <p><span>63%</span>Agree</p>
+              <p><span>15%</span>Neutral</p>
+            </div>
+            <h1>
+              Facilities such as classrooms, libraries and laboratories are
+              accessible and conducive to learning
+            </h1>
+            <p>100 responses</p>
+          </div>
+        </div>
+        <h1>Topic B: <span class="highlighted">Diversity</span></h1>
+        <div class="diversity">
+          <div class="pie-chart-wrapper">
+            <div class="pie-chart">
+              <p><span>10%</span>Strongly Agree</p>
+              <p><span>54%</span>Agree</p>
+              <p><span>22%</span>Neutral</p>
+              <p><span>6%</span>Disagree</p>
+              <p><span>8%</span>Strongly Disagree</p>
+            </div>
+            <h1>
+              Working with classmates from different cultural or academic
+              backgrounds in mathematics classes enhances my problem solving
+              ability.
+            </h1>
+            <p>100 responses</p>
+          </div>
+          <div class="pie-chart-wrapper">
+            <div class="pie-chart">
+              <p><span>7%</span>Strongly Agree</p>
+              <p><span>57%</span>Agree</p>
+              <p><span>31%</span> Neutral</p>
+              <p><span>1%</span>Disagree</p>
+              <p><span>4%</span>Strongly Disagree</p>
+            </div>
+            <h1>
+              My mathematics professors cite examples and application that
+              Illustrate diversity in culture, gender, and real-world contexts.
+            </h1>
+            <p>100 responses</p>
+          </div>
+
+          <div class="pie-chart-wrapper">
+            <div class="pie-chart">
+              <p><span>22%</span>Strongly Agree</p>
+              <p><span>56%</span>Agree</p>
+              <p><span>17%</span>Neutral</p>
+              <p><span>1%</span>Disagree</p>
+              <p>
+                <span>4%</span>Strongly <br />
+                Disagree
+              </p>
+            </div>
+            <h1>
+              All students in the mathematics class, regardless of their
+              background, have equal opportunities to contribute and participate
+            </h1>
+            <p>100 responses</p>
+          </div>
+
+          <div class="pie-chart-wrapper">
+            <div class="pie-chart">
+              <p><span>5%</span>Strongly Agree</p>
+              <p><span>47%</span>Agree</p>
+              <p><span>36%</span>Neutral</p>
+              <p><span>7%</span>Disagree</p>
+              <p><span>5%</span>Strongly Disagree</p>
+            </div>
+            <h1>
+              Teaching strategies in my mathematics program are sensitive to the
+              different learning styles and needs of the students
+            </h1>
+            <p>100 responses</p>
+          </div>
+
+          <div class="pie-chart-wrapper">
+            <div class="pie-chart">
+              <p><span>10%</span>Strongly Agree</p>
+              <p><span>70%</span>Agree</p>
+              <p><span>13%</span>Neutral</p>
+              <p><span>2%</span>Disagree</p>
+              <p><span>5%</span>Strongly Disagree</p>
+            </div>
+            <h1>
+              Diversity in my math class broadens my perspective and improves my
+              ability to Workingwith others to solve problems
+            </h1>
+            <p>100 responses</p>
+          </div>
+        </div>
+        <h1>Topic C: <span class="highlighted">inclusivity</span></h1>
+        <div class="inclusivity">
+          <div class="pie-chart-wrapper">
+            <div class="pie-chart">
+              <p><span>19%</span>Strongly Agree</p>
+              <p><span>52%</span>Agree</p>
+              <p><span>26%</span>Neutral</p>
+              <p><span>2%</span>Disagree</p>
+              <p><span>1%</span>Strongly Disagree</p>
+            </div>
+            <h1>
+              I feel respected and valued as a mathematics major studen in this
+              institution
+            </h1>
+            <p>100 responses</p>
+          </div>
+          <div class="pie-chart-wrapper">
+            <div class="pie-chart">
+              <p><span>19%</span>Strongly Agree</p>
+              <p><span>65%</span>Agree</p>
+              <p><span>13%</span> Neutral</p>
+              <p><span>2%</span>Disagree</p>
+              <p><span>1%</span>Strongly Disagree</p>
+            </div>
+            <h1>
+              The institution promotes equal opportunitiesfor all students,
+              regarless of gender, culture or background.
+            </h1>
+            <p>100 responses</p>
+          </div>
+
+          <div class="pie-chart-wrapper">
+            <div class="pie-chart">
+              <p><span>13%</span>Strongly Agree</p>
+              <p><span>66%</span>Agree</p>
+              <p><span>19%</span>Neutral</p>
+              <p><span>1%</span>Disagree</p>
+              <p><span>1%</span>Strongly Disagree</p>
+            </div>
+            <h1>
+              Institutional policies and practices reflects fairness and
+              inclusiveness
+            </h1>
+            <p>100 responses</p>
+          </div>
+
+          <div class="pie-chart-wrapper">
+            <div class="pie-chart">
+              <p><span>20%</span>Strongly Agree</p>
+              <p><span>65%</span>Agree</p>
+              <p><span>15%</span>Neutral</p>
+            </div>
+            <h1>
+              The classroom environment allows for open dialogue and respect
+              different perspectives
+            </h1>
+            <p>100 responses</p>
+          </div>
+
+          <div class="pie-chart-wrapper">
+            <div class="pie-chart">
+              <p><span>21%</span>Strongly Agree</p>
+              <p><span>66%</span>Agree</p>
+              <p><span>13%</span>Neutral</p>
+            </div>
+            <h1>
+              Student organizations and activities reflect diverse students
+              interests and background
+            </h1>
+            <p>100 responses</p>
+          </div>
+        </div>
+      </div>
+      <div class="milestone-container summary-container">
+        <h1>Summary Report</h1>
+        <div class="summary-card-wrapper">
+          <div class="summary-card">
+            <div class="first-content">
+              <span>Accessibility</span>
+            </div>
+            <div class="second-content">
+              <span>
+                <ul>
+                  <li>
+                    Most students report adequate learning facilities, including
+                    math laboratories (52%) and supportive classrooms and
+                    libraries (85%).
+                  </li>
+                  <li>
+                    A large majority (83%) say sufficient printed and digital
+                    math references are available.
+                  </li>
+                  <li>
+                    Learning tools and teaching methods are generally
+                    accessible, with 68% noting materials availability and 65%
+                    acknowledging diverse instructional approaches.
+                  </li>
+                </ul>
+              </span>
+            </div>
+          </div>
+          <div class="summary-card">
+            <div class="first-content">
+              <span>Diversity</span>
+            </div>
+            <div class="second-content">
+              <span>
+                <ul>
+                  <li>
+                    Students feel diversity enhances collaboration and
+                    problem-solving, with 64% agreeing that peer diversity
+                    benefits learning.
+                  </li>
+                  <li>
+                    Professors frequently use culturally relevant examples
+                    (64%), supporting inclusive engagement.
+                  </li>
+                  <li>
+                    While 78% see equal participation opportunities, neutral
+                    responses about teaching styles suggest room for improved
+                    differentiated instruction.
+                  </li>
+                </ul>
+              </span>
+            </div>
+          </div>
+          <div class="summary-card">
+            <div class="first-content">
+              <span>Inclusivity</span>
+            </div>
+            <div class="second-content">
+              <span>
+                <ul>
+                  <li>
+                    Most students view the institution as inclusive, with 71%
+                    seeing a welcoming environment and 84% acknowledging fair
+                    opportunities.
+                  </li>
+                  <li>
+                    Policies and classroom practices reflect fairness, supported
+                    by 79% and 85% agreement, respectively.
+                  </li>
+                  <li>
+                    Diverse student organizations (87%) further promote
+                    belonging and inclusivity.
+                  </li>
+                </ul>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="milestone-container conclusion-overall">
+        <div class="conclusion-wrapper">
+          <div class="card">
+            <div class="card-header">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                height="24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+                class="w-10 h-10 text-gray-300 bg-gray-600 rounded-full p-1"
+              >
+                <path
+                  d="m8.032 12 1.984 1.984 4.96-4.96m4.55 5.272.893-.893a1.984 1.984 0 0 0 0-2.806l-.893-.893a1.984 1.984 0 0 1-.581-1.403V7.04a1.984 1.984 0 0 0-1.984-1.984h-1.262a1.983 1.983 0 0 1-1.403-.581l-.893-.893a1.984 1.984 0 0 0-2.806 0l-.893.893a1.984 1.984 0 0 1-1.403.581H7.04A1.984 1.984 0 0 0 5.055 7.04v1.262c0 .527-.209 1.031-.581 1.403l-.893.893a1.984 1.984 0 0 0 0 2.806l.893.893c.372.372.581.876.581 1.403v1.262a1.984 1.984 0 0 0 1.984 1.984h1.262c.527 0 1.031.209 1.403.581l.893.893a1.984 1.984 0 0 0 2.806 0l.893-.893a1.985 1.985 0 0 1 1.403-.581h1.262a1.984 1.984 0 0 0 1.984-1.984V15.7c0-.527.209-1.031.581-1.403Z"
+                  stroke-width="2"
+                  stroke-linejoin="round"
+                  stroke-linecap="round"
+                  stroke="currentColor"
+                ></path>
+              </svg>
+              <h1>Conclusion</h1>
+            </div>
+            <ul>
+              <li>
+                Students hold positive perceptions of accessibility, diversity,
+                and inclusivity in mathematics education.
+              </li>
+              <li>
+                Facilities, teaching practices, and institutional policies
+                support fairness and engagement.
+              </li>
+              <li>
+                Neutral responses highlight areas for improvement, especially in
+                consistent differentiated instruction.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="overall-wrapper">
+          <div class="card">
+            <div class="card-header">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                height="24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+                class="w-10 h-10 text-gray-300 bg-gray-600 rounded-full p-1"
+              >
+                <path
+                  d="m8.032 12 1.984 1.984 4.96-4.96m4.55 5.272.893-.893a1.984 1.984 0 0 0 0-2.806l-.893-.893a1.984 1.984 0 0 1-.581-1.403V7.04a1.984 1.984 0 0 0-1.984-1.984h-1.262a1.983 1.983 0 0 1-1.403-.581l-.893-.893a1.984 1.984 0 0 0-2.806 0l-.893.893a1.984 1.984 0 0 1-1.403.581H7.04A1.984 1.984 0 0 0 5.055 7.04v1.262c0 .527-.209 1.031-.581 1.403l-.893.893a1.984 1.984 0 0 0 0 2.806l.893.893c.372.372.581.876.581 1.403v1.262a1.984 1.984 0 0 0 1.984 1.984h1.262c.527 0 1.031.209 1.403.581l.893.893a1.984 1.984 0 0 0 2.806 0l.893-.893a1.985 1.985 0 0 1 1.403-.581h1.262a1.984 1.984 0 0 0 1.984-1.984V15.7c0-.527.209-1.031.581-1.403Z"
+                  stroke-width="2"
+                  stroke-linejoin="round"
+                  stroke-linecap="round"
+                  stroke="currentColor"
+                ></path>
+              </svg>
+              <h1>Overall Interpretation</h1>
+            </div>
+            <ul>
+              <li>
+                Students generally agree that learning resources are accessible
+                and teachers support varied learning needs.
+              </li>
+              <li>
+                Diversity is recognized as valuable for collaboration, fairness,
+                and problem-solving.
+              </li>
+              <li>
+                Neutral ratings (13–36%) signal opportunities to strengthen
+                inclusive practices across the institution.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="milestone-container next-page">
+        <a href="home.html">
+          <button class="animated-button">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="arr-2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
+              ></path>
+            </svg>
+            <span class="text">Main Menu</span>
+            <span class="circle"></span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="arr-1"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
+              ></path>
+            </svg>
+          </button>
+        </a>
+        <a href="milestone-2.html">
+          <button class="animated-button">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="arr-2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
+              ></path>
+            </svg>
+            <span class="text">Milestone 2</span>
+            <span class="circle"></span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="arr-1"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
+              ></path>
+            </svg>
+          </button>
+        </a>
+      </div>
+    </div>
+
+    <script></script>
+  </body>
+</html>
