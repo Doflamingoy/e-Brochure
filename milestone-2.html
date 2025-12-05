@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Milestone 2</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+        color: #2c3e50;
+        line-height: 1.6;
+        padding: 40px 20px;
+      }
+
+      li,
+      p {
+        font-weight: 500;
+      }
+
+      .milestone-wrapper {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .milestone-wrapper-background .background-wrapper p {
+        background: linear-gradient(135deg, #4a5f5f 0%, #5c7070 100%);
+        color: #fff;
+      }
+
+      .milestone-container {
+        background: white;
+        padding: 50px;
+        margin-bottom: 40px;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07),
+          0 10px 20px rgba(0, 0, 0, 0.05);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .milestone-container::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 6px;
+        height: 100%;
+        background: linear-gradient(180deg, #4a5f5f 0%, #6b8080 100%);
+      }
+
+      .milestone-container h1 {
+        text-transform: uppercase;
+        color: #4a5f5f;
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 25px;
+        letter-spacing: 1px;
+        position: relative;
+        padding-left: 20px;
+      }
+
+      .milestone-container h1::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 20px;
+        width: 60px;
+        height: 4px;
+        background: #4a5f5f;
+        border-radius: 2px;
+      }
+
+      .milestone-container p {
+        color: #555;
+        font-size: 1.05rem;
+        margin-bottom: 15px;
+        line-height: 1.8;
+        padding-left: 20px;
+      }
+
+      .milestone-container span {
+        color: #4a5f5f;
+        font-weight: 600;
+      }
+
+      .milestone-wrapper-introduction {
+        background: linear-gradient(135deg, #4a5f5f 0%, #5c7070 100%);
+        color: white;
+        text-align: center;
+        padding: 70px 50px;
+        position: relative;
+      }
+
+      .milestone-wrapper-introduction::before {
+        display: none;
+      }
+
+      .milestone-wrapper-introduction h1 {
+        color: white;
+        font-size: 3rem;
+        margin-bottom: 20px;
+        padding-left: 0;
+      }
+
+      .milestone-wrapper-introduction h1::after {
+        left: 50%;
+        transform: translateX(-50%);
+        background: white;
+        width: 80px;
+      }
+
+      .milestone-wrapper-introduction p {
+        color: #e8f0f0;
+        font-size: 1.3rem;
+        padding-left: 0;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .milestone-wrapper-introduction span {
+        color: white;
+        font-weight: 700;
+        font-style: italic;
+      }
+
+      .background-wrapper {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 25px;
+        margin-top: 30px;
+      }
+
+      .background-wrapper p {
+        background: #f8fafb;
+        padding: 25px;
+        border-radius: 8px;
+        border-left: 4px solid #4a5f5f;
+        margin-bottom: 0;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .background-wrapper p:hover {
+        transform: translateX(8px);
+        box-shadow: 0 4px 12px rgba(74, 95, 95, 0.15);
+      }
+
+      .milestone-container ul {
+        list-style: none;
+        padding-left: 20px;
+        margin-top: 20px;
+      }
+
+      .milestone-container ul li {
+        color: #555;
+        font-size: 1.05rem;
+        margin-bottom: 15px;
+        padding-left: 35px;
+        position: relative;
+        line-height: 1.8;
+      }
+
+      .milestone-container ul li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 8px;
+        width: 20px;
+        height: 20px;
+        background: #4a5f5f;
+        clip-path: polygon(
+          50% 0%,
+          100% 25%,
+          100% 75%,
+          50% 100%,
+          0% 75%,
+          0% 25%
+        );
+      }
+
+      .milestone-container ul li ol li::before {
+        display: none;
+      }
+
+      .milestone-container ol {
+        padding-left: 40px;
+        margin-top: 15px;
+      }
+
+      .milestone-container ol li {
+        color: #555;
+        font-size: 1rem;
+        margin-bottom: 10px;
+        padding-left: 10px;
+        line-height: 1.8;
+      }
+
+      .milestone-container ol li::marker {
+        color: #4a5f5f;
+        font-weight: 700;
+      }
+
+      .milestone-wrapper-ojectives p,
+      .milestone-wrapper-support ol li {
+        background: #f8fafb;
+        padding: 20px 25px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        border-left: 4px solid #6b8080;
+      }
+
+      .milestone-wrapper-support ol {
+        padding-left: 0;
+        margin-top: 30px;
+      }
+
+      .milestone-wrapper-support ol li {
+        list-style-position: inside;
+        padding-left: 15px;
+      }
+
+      @media (max-width: 768px) {
+        body {
+          padding: 20px 10px;
+        }
+
+        .milestone-container {
+          padding: 30px 25px;
+        }
+
+        .milestone-container h1 {
+          font-size: 1.5rem;
+        }
+
+        .milestone-wrapper-introduction {
+          padding: 50px 30px;
+        }
+
+        .milestone-wrapper-introduction h1 {
+          font-size: 2rem;
+        }
+
+        .milestone-wrapper-introduction p {
+          font-size: 1.1rem;
+        }
+
+        .background-wrapper {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .next-page {
+        display: flex;
+        justify-content: space-between;
+        a {
+          text-decoration: none;
+        }
+        a:nth-child(1) {
+          .animated-button svg {
+            transform: rotate(180deg);
+          }
+
+          .animated-button .text {
+            transform: translateX(12px);
+          }
+
+          .animated-button:hover .text {
+            transform: translateX(-12px);
+          }
+
+          .animated-button .arr-2 {
+            left: 16px;
+            fill: #000;
+          }
+
+          .animated-button:hover .arr-2 {
+            left: -25%;
+          }
+
+          .animated-button:hover .arr-1 {
+            right: 16px;
+          }
+
+          .animated-button .arr-1 {
+            right: -25%;
+          }
+        }
+        .animated-button {
+          position: relative;
+          display: flex;
+          align-items: center;
+          gap: 4px;
+          padding: 16px 36px;
+          border: 4px solid;
+          border-color: transparent;
+          background: #759286;
+          font-size: 16px;
+          border-radius: 100px;
+          font-weight: 600;
+          color: #1f387e;
+          box-shadow: 0 0 0 2px #ffffff;
+          cursor: pointer;
+          overflow: hidden;
+          transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .animated-button svg {
+          position: absolute;
+          width: 24px;
+          fill: #fff;
+          z-index: 9;
+          transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .animated-button .arr-1 {
+          right: 16px;
+          fill: #000;
+        }
+
+        .animated-button .arr-2 {
+          left: -25%;
+        }
+
+        .animated-button .circle {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 20px;
+          height: 20px;
+          background: #24363a;
+          border-radius: 50%;
+          opacity: 0;
+          transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .animated-button .text {
+          position: relative;
+          z-index: 1;
+          transform: translateX(-12px);
+          transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+          color: #000;
+        }
+
+        .animated-button:hover {
+          box-shadow: 0 0 0 12px transparent;
+          color: #212121;
+          border-radius: 12px;
+          background: #24363a;
+        }
+
+        .animated-button:hover .arr-1 {
+          right: -25%;
+        }
+
+        .animated-button:hover .arr-2 {
+          left: 16px;
+        }
+
+        .animated-button:hover .text {
+          transform: translateX(12px);
+          color: #fff;
+        }
+
+        .animated-button:hover svg {
+          fill: #fff;
+        }
+
+        .animated-button:active {
+          scale: 0.95;
+        }
+
+        .animated-button:hover .circle {
+          width: 220px;
+          height: 220px;
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="milestone-wrapper">
+      <div class="milestone-container milestone-wrapper-introduction">
+        <h1>Milestone 2</h1>
+        <p>
+          <span>Tour to know:</span> Freshmen Impression on the Learning
+          Environment and Resources
+        </p>
+      </div>
+    </div>
+    <div class="milestone-container milestone-wrapper-background">
+      <h1>Background and Rationale</h1>
+      <div class="background-wrapper">
+        <p>
+          Inclusive mathematics education values human diversity and ensures
+          that all students can progress academically and develop holistically
+        </p>
+        <p>
+          EDI (Equity, Diversity, and Inclusion) supports respectful, safe, and
+          equitable learning environments where all students feel valued and
+          included.
+        </p>
+        <p>
+          Inclusive math classrooms use varied pedagogical approaches and
+          teaching resources that allow all learners—regardless of background or
+          ability—to participate meaningfully.
+        </p>
+        <p>
+          Some university students still report inadequate learning resources
+          and facilities, highlighting the need for continued support to
+          strengthen inclusive practices.
+        </p>
+        <p>
+          First-year university students will conduct a campus tour to observe
+          learning facilities, gather data, and assess how these resources
+          influence engagement and sense of belonging.
+        </p>
+        <p>
+          Findings from the visit aim to provide recommendations for improving
+          inclusive mathematics education, supporting student engagement, and
+          enhancing campus learning environments.
+        </p>
+      </div>
+    </div>
+    <div class="milestone-container milestone-wrapper-project">
+      <h1>Description of the Activity / Project</h1>
+      <p>
+        The
+        <span
+          >“Tour to Know: Mathematics Freshmen's Impressions of the Learning
+          Environment and Resources”
+        </span>
+        is an observational campus tour for students. Guided by an admission
+        officer, participants will visit university facilities and observe real
+        classroom lessons. The tour aims to help students evaluate the learning
+        environment, available resources, and teaching approaches to determine
+        whether the institution meets their academic needs.
+      </p>
+      <ul>
+        <li>Target Participants: Freshmen Students</li>
+        <li>
+          Key Activities: Campus Tour and Observational Visit
+          <ol>
+            <li>Orientation and Introduction</li>
+            <li>Interactive discussion and reflection</li>
+            <li>Feedback and Evaluation</li>
+          </ol>
+        </li>
+      </ul>
+    </div>
+    <div class="milestone-container milestone-wrapper-ojectives">
+      <h1>Objectives / Expected Outcomes</h1>
+      <p>
+        1. To increase first-year students’ awareness of the school’s learning
+        environment and available academic resources by 80%, as measured through
+        post-tour feedback and reflection forms collected at the end of the
+        activity.
+      </p>
+      <p>
+        2. To assess and document at least three areas for improvement in the
+        inclusivity and accessibility of learning spaces, based on the analysis
+        of student feedback and observation reports gathered during the tour.
+      </p>
+    </div>
+    <div class="milestone-container milestone-wrapper-support">
+      <h1>Theoretical and Scholarly Support</h1>
+      <ol>
+        <li>
+          According to Vithal (2023), A systematic review of equity-related
+          studies in mathematics education from 2017 to 2022 was conducted,
+          revealing five main topics: equity understanding, fair teaching
+          practices, curriculum availability, and system practices.
+        </li>
+        <li>
+          According to Abtahi & Planas (2024), A framework has been established
+          that connects EDI with mathematics instruction and teacher preparation
+          to fight against exclusion.
+        </li>
+        <li>
+          According to Wang et al. (2023), Social Cognitive Career Theory was
+          applied to analyze gender disparities in STEM interest, and it was
+          found that self-efficacy, social support, and exposure have distinct
+          effects on the engagement of males and females.
+        </li>
+      </ol>
+    </div>
+
+    <div class="next-page">
+      <a href="milestone-1.html">
+        <button class="animated-button">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="arr-2"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
+            ></path>
+          </svg>
+          <span class="text">Milestone 1</span>
+          <span class="circle"></span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="arr-1"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
+            ></path>
+          </svg>
+        </button>
+      </a>
+      <a href="milestone-3.html">
+        <button class="animated-button">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="arr-2"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
+            ></path>
+          </svg>
+          <span class="text">Milestone 3</span>
+          <span class="circle"></span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="arr-1"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
+            ></path>
+          </svg>
+        </button>
+      </a>
+    </div>
+  </body>
+</html>
