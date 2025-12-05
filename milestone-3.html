@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Milestone 2</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+        color: #2c3e50;
+        line-height: 1.6;
+        padding: 40px 20px;
+      }
+
+      .milestone-wrapper {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      .milestone-container {
+        margin-bottom: 40px;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07),
+          0 10px 20px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+      }
+
+      .milestone-container h1 {
+        text-transform: uppercase;
+        font-weight: 700;
+        letter-spacing: 1px;
+        position: relative;
+      }
+
+      .milestone-container h1::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 20px;
+        width: 60px;
+        height: 4px;
+        background: #4a5f5f;
+        border-radius: 2px;
+      }
+
+      .milestone-wrapper-introduction {
+        background: linear-gradient(135deg, #4a5f5f 0%, #5c7070 100%);
+        color: white;
+        text-align: center;
+        padding: 70px 50px;
+        position: relative;
+      }
+
+      .milestone-wrapper-introduction h1 {
+        color: white;
+        font-size: 3rem;
+        margin-bottom: 20px;
+        padding-left: 0;
+      }
+
+      .milestone-wrapper-introduction h1::after {
+        left: 50%;
+        transform: translateX(-50%);
+        background: white;
+        width: 80px;
+      }
+
+      .stack-wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+      }
+
+      img {
+        display: block;
+        width: 100%;
+        max-width: 352px;
+      }
+
+      .stack {
+        max-width: 400px;
+        transition: 0.25s ease;
+        &:hover {
+          transform: rotate(5deg);
+          .card:before {
+            transform: translatey(-2%) rotate(-4deg);
+          }
+          .card:after {
+            transform: translatey(2%) rotate(4deg);
+          }
+        }
+      }
+
+      .card {
+        aspect-ratio: 3 / 2;
+        border: 4px solid;
+        background-color: #fff;
+        position: relative;
+        transition: 0.15s ease;
+        cursor: pointer;
+        padding: 5% 5% 15% 5%;
+        &:before,
+        &:after {
+          content: "";
+          display: block;
+          position: absolute;
+          height: 100%;
+          width: 100%;
+          border: 4px solid;
+          background: #759286;
+          transform-origin: center center;
+          z-index: -1;
+          transition: 0.15s ease;
+          top: 0;
+          left: 0;
+        }
+
+        &::after {
+          background-color: #24363a;
+        }
+
+        &:before {
+          transform: translatey(-2%) rotate(-6deg);
+        }
+
+        &:after {
+          transform: translatey(2%) rotate(6deg);
+        }
+      }
+
+      .isabela-stack,
+      .cainta-stack {
+        width: 440px;
+        max-width: 440px;
+      }
+
+      .card h1 {
+        position: absolute;
+        bottom: 8px;
+        left: 50%;
+        text-wrap: nowrap;
+        transform: translateX(-50%);
+      }
+      .image {
+        width: 100%;
+        border: 4px solid;
+        background-color: #eee;
+        position: relative;
+      }
+
+      @supports (aspect-ratio: 1 / 1) {
+        .browser-warning {
+          display: none;
+        }
+      }
+
+      /* Modal Styles */
+      .isabela-modal,
+      .cainta-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.95);
+        z-index: 1000;
+        overflow-y: auto;
+        padding: 60px 20px 20px;
+      }
+
+      .isabela-modal.active,
+      .cainta-modal.active {
+        display: block;
+      }
+
+      .modal-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+        padding: 20px;
+      }
+
+      .isabela-modal img,
+      .cainta-modal img {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+      }
+
+      .isabela-modal img:hover,
+      .cainta-modal img:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 16px rgba(255, 255, 255, 0.2);
+      }
+
+      .modal-close {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        background: #fff;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        z-index: 1001;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        font-weight: bold;
+        color: #333;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        transition: transform 0.3s ease, background 0.3s ease;
+      }
+
+      .modal-close:hover {
+        background: #4a5f5f;
+        color: #fff;
+        transform: rotate(90deg);
+      }
+
+      .modal-title {
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #fff;
+        color: #4a5f5f;
+        padding: 12px 30px;
+        border-radius: 25px;
+        font-weight: 700;
+        font-size: 1.2rem;
+        z-index: 1001;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      #isabela-modal,
+      #cainta-modal {
+        cursor: pointer;
+      }
+
+      @media (max-width: 768px) {
+        .modal-content {
+          grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+          gap: 15px;
+          padding: 15px;
+        }
+
+        .modal-title {
+          font-size: 1rem;
+          padding: 10px 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="milestone-wrapper">
+      <div class="milestone-container milestone-wrapper-introduction">
+        <h1>Milestone 3</h1>
+      </div>
+    </div>
+    <div class="milestone-wrapper stack-wrapper">
+      <div class="isabela-stack" id="isabela-modal">
+        <div class="stack">
+          <div class="card">
+            <h1>Isabela State University</h1>
+            <div class="image"><img src="isabela-1.jpg" /></div>
+          </div>
+        </div>
+      </div>
+      <div class="cainta-stack" id="cainta-modal">
+        <div class="stack">
+          <div class="card">
+            <h1>ICCT Colleges</h1>
+            <div class="image"><img src="icct-1.jpg" /></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="isabela-modal">
+      <button class="modal-close" onclick="closeModal('isabela-modal')">
+        ×
+      </button>
+      <div class="modal-title">Isabela State University Gallery</div>
+      <div class="modal-content">
+        <img src="isabela-1.jpg" alt="Isabela 1" />
+        <img src="isabela-2.jpg" alt="Isabela 2" />
+        <img src="isabela-3.jpg" alt="Isabela 3" />
+        <img src="isabela-4.jpg" alt="Isabela 4" />
+        <img src="isabela-5.jpg" alt="Isabela 5" />
+        <img src="isabela-6.jpg" alt="Isabela 6" />
+        <img src="isabela-7.jpg" alt="Isabela 7" />
+        <img src="isabela-8.jpg" alt="Isabela 8" />
+        <img src="isabela-9.jpg" alt="Isabela 9" />
+        <img src="isabela-10.jpg" alt="Isabela 10" />
+        <img src="isabela-11.jpg" alt="Isabela 11" />
+        <img src="isabela-12.jpg" alt="Isabela 12" />
+        <img src="isabela-13.jpg" alt="Isabela 13" />
+        <img src="isabela-14.jpg" alt="Isabela 14" />
+        <img src="isabela-15.jpg" alt="Isabela 15" />
+        <img src="isabela-16.jpg" alt="Isabela 16" />
+      </div>
+    </div>
+
+    <div class="cainta-modal">
+      <button class="modal-close" onclick="closeModal('cainta-modal')">
+        ×
+      </button>
+      <div class="modal-title">ICCT Colleges Gallery</div>
+      <div class="modal-content">
+        <img src="icct-1.jpg" alt="Cainta 1" />
+        <img src="icct-2.jpg" alt="Cainta 2" />
+        <img src="icct-3.jpg" alt="Cainta 3" />
+        <img src="icct-4.jpg" alt="Cainta 4" />
+        <img src="icct-5.jpg" alt="Cainta 5" />
+        <img src="icct-6.jpg" alt="Cainta 6" />
+        <img src="icct-7.jpg" alt="Cainta 7" />
+        <img src="icct-8.jpg" alt="Cainta 8" />
+        <img src="icct-9.jpg" alt="Cainta 9" />
+        <img src="icct-10.jpg" alt="Cainta 10" />
+        <img src="icct-11.jpg" alt="Cainta 11" />
+        <img src="icct-12.jpg" alt="Cainta 12" />
+        <img src="icct-13.jpg" alt="Cainta 13" />
+        <img src="icct-14.jpg" alt="Cainta 14" />
+        <img src="icct-15.jpg" alt="Cainta 15" />
+        <img src="icct-16.jpg" alt="Cainta 16" />
+      </div>
+    </div>
+
+    <script>
+      // Open modal when clicking on the card
+      document
+        .getElementById("isabela-modal")
+        .addEventListener("click", function () {
+          document.querySelector(".isabela-modal").classList.add("active");
+          document.body.style.overflow = "hidden";
+        });
+
+      document
+        .getElementById("cainta-modal")
+        .addEventListener("click", function () {
+          document.querySelector(".cainta-modal").classList.add("active");
+          document.body.style.overflow = "hidden";
+        });
+
+      // Close modal function
+      function closeModal(modalClass) {
+        document.querySelector("." + modalClass).classList.remove("active");
+        document.body.style.overflow = "auto";
+      }
+
+      // Close modal when clicking outside the images
+      document
+        .querySelectorAll(".isabela-modal, .cainta-modal")
+        .forEach(function (modal) {
+          modal.addEventListener("click", function (e) {
+            if (e.target === modal) {
+              modal.classList.remove("active");
+              document.body.style.overflow = "auto";
+            }
+          });
+        });
+
+      // Close modal with Escape key
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
+          document
+            .querySelectorAll(".isabela-modal, .cainta-modal")
+            .forEach(function (modal) {
+              modal.classList.remove("active");
+            });
+          document.body.style.overflow = "auto";
+        }
+      });
+    </script>
+  </body>
+</html>
